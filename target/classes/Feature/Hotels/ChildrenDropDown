@@ -1,4 +1,4 @@
-Feature: Children Dropdown
+Feature: Children DropDown
 
   Scenario Outline: Verify user get correct number of dropdown after selecting children
     Given I am on hotels landing page
@@ -14,4 +14,3 @@ Feature: Children Dropdown
       |4            |
       |5            |
       |6            |
-
