@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
+
 public class LandingPage extends BasePage {
     By feelsLikeTempDegreesLocator = By.xpath("//span[@class='feels-like-text']");
     By lowTempDegreesLocator = By.xpath("//span[@class='low-temp-text']");
@@ -19,6 +21,11 @@ public class LandingPage extends BasePage {
     By todayTimeLineBarLocator = By.xpath("//div[@id=\"week\"]/a[1]/span[2]/span[@class='bar']");
     By todayLowTempDetailsLocator = By.xpath("//div[@class='dayDetails revealed']//span[@class='highTemp swip']//span[@class='temp']");
     By todayHighTempDetailsLocator = By.xpath("//div[@class='dayDetails revealed']//span[@class='lowTemp swap']//span[@class='temp']");
+    By firstPageTimeLine = By.xpath("//div[@id='timeline']//div[@class='hours']/span");
+
+    public boolean getTimelineHr(int increment) {
+        return isIncrement(firstPageTimeLine,increment);
+    }
 
     public boolean isFeelsLikeTempisDisplayed(){
          return Web.getDriver().findElement(feelsLikeTempDegreesLocator).isDisplayed();

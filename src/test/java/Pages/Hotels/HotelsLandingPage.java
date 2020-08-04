@@ -4,7 +4,9 @@ import Drivers.Web;
 import Pages.BasePage;
 import Utils.DateHelper;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HotelsLandingPage extends BasePage {
@@ -21,11 +23,27 @@ public class HotelsLandingPage extends BasePage {
     By allMonthsCalenderLocator = By.xpath("//div[@class='widget-datepicker-label']");
     By nextMonthButtonLocator = By.xpath("//div[@class='widget-daterange-cont']//div[2]//div[1]//button[2]");
     By monthTextLocator = By.xpath("//div[@class='widget-datepicker-label']");
+    By childDropDownLocator = By.id("qf-0q-room-0-children");
+    By joinNowPopUpXLocator = By.xpath("//div[@id='header-full']//div[2]//span[3]");
+    By visableChildDropDownsLocator = By.className("widget-query-room-options-children");
 
+
+
+    public int getTotalChildDropDowns (){
+      return getTotalElementsInList(visableChildDropDownsLocator);
+    }
+
+    public void clickChildDropDownAndSelectAmt(int amount){
+        WebElement chDrop = Web.getDriver().findElement(childDropDownLocator);
+        Select childDrop = new Select(chDrop);
+        childDrop.selectByValue(Integer.toString(amount));
+
+    }
 
     public void closePopUpWindow() {
         clickThis(adPopUpXLocator);
     }
+    public void closeJoinNowPopUp () {clickThis(joinNowPopUpXLocator);}
 
     public void enterTextInSearchBox(String place){
         type(searchBoxLocator,place);

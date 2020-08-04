@@ -1,6 +1,6 @@
 Feature: Ratings
 
-  Scenario Outline: Verify hotel shows up as star rating selected by user
+  Scenario Outline: Verify hotel shows up as star rating selected by user <star>
     Given I am on default locations search result screen
     When I click on <star> star
     And I verify hotels are <star> star rating

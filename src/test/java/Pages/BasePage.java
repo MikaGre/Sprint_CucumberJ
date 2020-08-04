@@ -1,11 +1,13 @@
 package Pages;
 
 import Drivers.Web;
+import cucumber.api.java.ca.I;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -105,6 +107,35 @@ public class BasePage {
 
     public void clearField (By locator) {
         Web.getDriver().findElement(locator).clear();
+    }
+
+    public boolean isIncrement (By locator , int increment) {
+        List<WebElement> results = findElementsUsingFluentWait(locator);
+         String[] time = null;
+         int hr = Integer.MIN_VALUE;
+         int hr2 = Integer.MIN_VALUE;
+         boolean isHr = false;
+
+        for (WebElement e : results) {
+            if (e.getText().contains("am") | e.getText().contains("pm")) {
+                time = e.getText().split("(am|pm)");
+                hr = Integer.parseInt(time[0].toString());
+                if (hr - hr2 == increment) {
+                    isHr = true;
+                    break;
+                }else {
+                    hr2 = hr;
+                }
+                    }
+            }
+
+       return isHr;
+    }
+
+    public int getTotalElementsInList (By locator){
+        List<WebElement> results = findElementsUsingFluentWait(locator);
+        int total;
+        return total = results.size();
     }
 
     public String getFirstNumberFromListOfResults (By locator) {
@@ -235,15 +266,6 @@ public class BasePage {
         }
     }
 
-   /* public void selectMonthFromCalendar(By locator, String userMonth) {
-        List<WebElement> allMonths = findElementsUsingFluentWait(locator);
-        for (WebElement month : allMonths) {
-            if (month.getText().contains(userMonth)) {
-                clickThis(month);
-                break;
-            }
-        }
-    }*/
     public void selectMonthFromCalendar(By mLocator, By dLocator, By nextButton, String userMonth) {
         WebElement month;
         String[] m = userMonth.split(" ");
@@ -258,6 +280,19 @@ public class BasePage {
             }
         } while (isMonthVis);
 
+    }
+
+    public boolean isPresentTextFromList (By locator, int search) {
+      List<WebElement> list = findElementsUsingFluentWait(locator);
+      boolean isPresent = true;
+        for (WebElement e : list) {
+            String value = e.getText();
+            if (!value.substring(0,1).contains(Integer.toString(search))){
+                isPresent = false;
+                break;
+            }
+        }
+        return isPresent;
     }
 
 }
