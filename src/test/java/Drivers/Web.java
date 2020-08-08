@@ -17,11 +17,13 @@ public class Web {
     public static void initDriver(String url) {
         System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver");
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        driver.manage().deleteAllCookies();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get(url);
     }
 
+    public static void refresh () {
+        driver.navigate().refresh();
+    }
     public static void closeDriver() {
         driver.close();
     }

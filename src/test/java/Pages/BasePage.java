@@ -105,6 +105,17 @@ public class BasePage {
         }
     }
 
+    public void jsSelectFromAutoSuggestions (By locator, String textToSelect) {
+        List<WebElement> autoSuggestions = Web.getDriver().findElements(locator);
+        JavascriptExecutor js = (JavascriptExecutor) Web.getDriver();
+        for (WebElement e : autoSuggestions) {
+            if (e.isDisplayed()) {
+               js.executeScript("arguments[0].click();",e);
+                break;
+            }
+        }
+    }
+
     public void clearField (By locator) {
         Web.getDriver().findElement(locator).clear();
     }
@@ -284,15 +295,15 @@ public class BasePage {
 
     public boolean isPresentTextFromList (By locator, int search) {
       List<WebElement> list = findElementsUsingFluentWait(locator);
-      boolean isPresent = true;
+      boolean isNotPresent = false;
         for (WebElement e : list) {
             String value = e.getText();
-            if (!value.substring(0,1).contains(Integer.toString(search))){
-                isPresent = false;
+            if (value.substring(0,1).contains(Integer.toString(search))){
+                isNotPresent = true;
                 break;
             }
         }
-        return isPresent;
+        return isNotPresent;
     }
 
 }
