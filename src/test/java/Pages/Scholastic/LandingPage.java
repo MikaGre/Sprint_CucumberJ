@@ -16,8 +16,6 @@ public class LandingPage extends BasePage {
     By passwordBoxLocator = By.xpath("//input[@id='dwfrm_profile_login_password']");
     By mobileNumBoxLocator = By.xpath("//input[@id='dwfrm_profile_customer_phone']");
     By zipCodeBoxLocator = By.xpath("//input[@id='dwfrm_myschool_schoolzip']");
-   // By stateBoxLocator = By.xpath("//div[@class='selected-option input-select']");
-   // By stateListLocator = By.xpath("//li[@class='custom-option select-option']");
     By searchButtonLocator = By.xpath("//div[@class='findschool-byzip']//button[@id='button-search']");
     By schoolNameBoxLocator = By.xpath("//input[@id='dwfrm_searchschool_schoolvalue']");
     By schoolListLocator = By.className("(//ul[@id='ui-id-774'])/li");
@@ -31,9 +29,67 @@ public class LandingPage extends BasePage {
     By roleNextButton = By.xpath("//button[@name='dwfrm_myrole_findgrade']");
     By numOfStudentLocator = By.xpath("//input[@id='dwfrm_myrole_students']");
     By readingLvlBoxLocator = By.xpath("//div[@class='selected-option input-select required']");
+    By signInButtonLocator = By.className("signin");
+    By emailAccountFieldSinginLocator = By.xpath("//div[contains(@class,'login-box-content returning-customers clearfix')]//input[contains(@placeholder,'Scholastic Account Email')]");
+    By passwordAccountFieldSinginLocator = By.xpath("//div[contains(@class,'form-row row-password-input required')]//input[@id='dwfrm_login_password']");
+    By topNavMyAccountLocator = By.xpath("//span[@class='hide-mobile user-account-name']");
+    By signInLocator = By.xpath("//div[@id='dialog-container']//button[1]");
+    By menuProfileLocator = By.xpath("//a[@class='null'][contains(text(),'Profile')]");
+    By notificationCloseLocator = By.xpath("//span[@class='notification-close']");
+    By enterOrdersMenuLocator = By.xpath("//div[@class='hide-mobile desktop_nav_menu']//a[@id='enter-orders']");
+    By ytoOptLocator = By.xpath("//div[@class='hide-mobile desktop_nav_menu']//a[contains(text(),'Your Teacher Order')]");
+    By cartButtonLocator = By.xpath("//i[@class='minicart-icon shopping-cart']");
+    By searchBarLocator = By.xpath("//input[@id='q']");
+    By searchBntLocator = By.xpath("//i[@class='fa fa-search']");
+    By myListButtonLocator = By.xpath("//span[contains(text(),'My Lists')]");
+    By recommendationListButtonLocator = By.xpath("//li[@class='recommend']/a[1]/span[1]");
 
+    public void clickOnMyListPop (){
+        clickThis(myListButtonLocator);
+        clickThis(notificationCloseLocator);
+        clickThis(myListButtonLocator);
+        clickThis(recommendationListButtonLocator);
+    }
 
+    public void clickOnMyList (){
+        clickThis(myListButtonLocator);
+    }
 
+    public void clickRecommendationList(){
+      clickThis(myListButtonLocator);
+      clickThis(recommendationListButtonLocator);
+    }
+
+    public void searchItem(String item){
+        type(searchBarLocator,item);
+        clickThis(searchBntLocator);
+    }
+
+    public void clickCart(){
+        clickThis(cartButtonLocator);
+    }
+
+    public void clickYTO(){
+       mouseHoverOverElement(enterOrdersMenuLocator);
+       clickThis(notificationCloseLocator);
+       mouseHoverOverElement(enterOrdersMenuLocator);
+       clickThis(ytoOptLocator);
+    }
+
+    public void clickProfile(){
+        clickThis(topNavMyAccountLocator);
+        clickThis(notificationCloseLocator);
+        clickThis(topNavMyAccountLocator);
+        clickThis(menuProfileLocator);
+    }
+
+    public void signIn (String email, String password) {
+        clickThis(signInButtonLocator);
+        type(emailAccountFieldSinginLocator,email);
+        type(passwordAccountFieldSinginLocator,password);
+        clickThis(signInLocator);
+
+    }
 
     public void clickCreateAccountButton () {
         clickThis(createAccountButtonLocator);

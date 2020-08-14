@@ -17,6 +17,7 @@ public class Web {
     public static void initDriver(String url) {
         System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver");
         driver = new ChromeDriver();
+        deleteCookies();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get(url);
     }

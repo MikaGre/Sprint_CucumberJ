@@ -232,6 +232,11 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public void waitForElementClickable(By locator, int timeOutInSeconds) {
+        WebDriverWait wait = new WebDriverWait(Web.getDriver(),timeOutInSeconds);
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
     public void waitForPageTitle(String title, int timeOutInSeconds) {
         WebDriverWait wait = new WebDriverWait(Web.getDriver(),timeOutInSeconds);
         wait.until(ExpectedConditions.titleIs(title));
@@ -293,12 +298,26 @@ public class BasePage {
 
     }
 
+    //Takes what is in 1st (0) index uses substring
     public boolean isPresentTextFromList (By locator, int search) {
       List<WebElement> list = findElementsUsingFluentWait(locator);
       boolean isNotPresent = false;
         for (WebElement e : list) {
             String value = e.getText();
             if (value.substring(0,1).contains(Integer.toString(search))){
+                isNotPresent = true;
+                break;
+            }
+        }
+        return isNotPresent;
+    }
+
+    public boolean isPresentTextFromList (By locator, String search) {
+      List<WebElement> list = findElementsUsingFluentWait(locator);
+      boolean isNotPresent = false;
+        for (WebElement e : list) {
+            String value = e.getText();
+            if (value.contains(search)){
                 isNotPresent = true;
                 break;
             }
